@@ -1,11 +1,16 @@
+import AppNavbar from './AppNavbar';
+import AppRoutes from './AppRoutes';
+
 import './App.css';
 
-function App() {
+const App = () => {
 	return (
 		<div className="App">
-			<h1>Another Movie App</h1>
+			<h1>Another Movie</h1>
+			<AppNavbar />
+			<AppRoutes />
 		</div>
 	);
-}
+};
 
 export default App;
