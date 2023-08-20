@@ -39,7 +39,12 @@ class MovieDatabaseAPI {
 	}
 	static async getTvSeries() {}
 	static async updateTvSeries() {}
-	static async searchTv() {}
+	static async searchTv(query) {
+		const results = await this.request('api/search/tv', {
+			query,
+		});
+		return results.results;
+	}
 }
 
 MovieDatabaseAPI.token =

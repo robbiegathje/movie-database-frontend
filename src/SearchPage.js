@@ -23,18 +23,26 @@ const SearchPage = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+	};
+
+	const searchMovies = async (event) => {
 		const response = await MovieDatabaseAPI.searchMovies(query);
+		setResults(response);
+	};
+
+	const searchTv = async (event) => {
+		const response = await MovieDatabaseAPI.searchTv(query);
 		setResults(response);
 	};
 
 	return (
 		<Container>
 			<Form onSubmit={handleSubmit}>
-				<FormGroup row>
+				<FormGroup row className="mt-2">
 					<Label xs="2" for="query">
 						Search:
 					</Label>
-					<Col xs="8">
+					<Col xs="10">
 						<Input
 							id="query"
 							name="query"
@@ -43,22 +51,27 @@ const SearchPage = () => {
 							onChange={handleChange}
 						/>
 					</Col>
-					<Col xs="2">
-						<Button>See Results!</Button>
-					</Col>
+					<Row className="mt-2">
+						<Col xs="6" lg={{ offset: 6, size: 3 }} xl={{ offset: 8, size: 2 }}>
+							<Button onClick={searchMovies}>Search for Movies</Button>
+						</Col>
+						<Col xs="6" lg="3" xl="2">
+							<Button onClick={searchTv}>Search for TV</Button>
+						</Col>
+					</Row>
 				</FormGroup>
 			</Form>
 			{results.length === 0 ? null : (
 				<Row>
-					{results.map((movie) => {
+					{results.map((result) => {
 						return (
 							<ContentCard
-								key={movie.api_id}
-								api_id={movie.api_id}
-								title={movie.title}
-								overview={movie.overview}
-								poster_url={movie.poster_url}
-								release_date={movie.release_date}
+								key={result.api_id}
+								api_id={result.api_id}
+								title={result.title || result.name}
+								overview={result.overview}
+								poster_url={result.poster_url}
+								release_date={result.release_date || result.first_air_date}
 							/>
 						);
 					})}
