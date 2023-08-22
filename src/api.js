@@ -29,7 +29,10 @@ class MovieDatabaseAPI {
 	static async getFavoriteTv() {}
 	static async addFavoriteTv() {}
 	static async removeFavoriteTv() {}
-	static async getMovie() {}
+	static async getMovie(api_id) {
+		const results = await this.request(`api/movies/${api_id}`);
+		return results.movie;
+	}
 	static async updateMovie() {}
 	static async searchMovies(query) {
 		const results = await this.request('api/search/movies', {
@@ -37,7 +40,10 @@ class MovieDatabaseAPI {
 		});
 		return results.results;
 	}
-	static async getTvSeries() {}
+	static async getTvSeries(api_id) {
+		const results = await this.request(`api/tv/${api_id}`);
+		return results.series;
+	}
 	static async updateTvSeries() {}
 	static async searchTv(query) {
 		const results = await this.request('api/search/tv', {

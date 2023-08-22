@@ -1,0 +1,21 @@
+img.Content-poster {
+	width: 30vw;
+}
+
+h1.Content-title {
+	font-size: 6vw;
+}
+
+h2.Content-tagline {
+	font-size: 3.5vw;
+}
+
+h3.Content-genre {
+	display: inline-block;
+	margin: 0px 1vw;
+	font-size: 2.5vmin;
+}
+
+.Content-data {
+	font-size: 2vmin;
+}

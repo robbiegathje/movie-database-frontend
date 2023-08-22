@@ -27,12 +27,18 @@ const SearchPage = () => {
 
 	const searchMovies = async (event) => {
 		const response = await MovieDatabaseAPI.searchMovies(query);
-		setResults(response);
+		const results = response.map((result) => {
+			return { ...result, content: 'movies' };
+		});
+		setResults(results);
 	};
 
 	const searchTv = async (event) => {
 		const response = await MovieDatabaseAPI.searchTv(query);
-		setResults(response);
+		const results = response.map((result) => {
+			return { ...result, content: 'tv' };
+		});
+		setResults(results);
 	};
 
 	return (
@@ -62,7 +68,7 @@ const SearchPage = () => {
 				</FormGroup>
 			</Form>
 			{results.length === 0 ? null : (
-				<Row>
+				<Row className="mt-2">
 					{results.map((result) => {
 						return (
 							<ContentCard
@@ -72,6 +78,7 @@ const SearchPage = () => {
 								overview={result.overview}
 								poster_url={result.poster_url}
 								release_date={result.release_date || result.first_air_date}
+								content={result.content}
 							/>
 						);
 					})}
