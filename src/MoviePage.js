@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Col, Container, Row } from 'reactstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Col, Container, Row } from 'reactstrap';
 
 import MovieDatabaseAPI from './api';
-import Credits from './Credits';
 import StreamingList from './StreamingList';
 import VideoReel from './VideoReel';
 
@@ -22,10 +21,8 @@ const MoviePage = () => {
 	}, [id]);
 
 	if (!movieData) {
-		return <h1>Loading</h1>;
+		return <h1>Loading...</h1>;
 	}
-
-	console.log(movieData);
 
 	return (
 		<Container>
@@ -42,7 +39,7 @@ const MoviePage = () => {
 					<h2 className="Content-tagline">{movieData.tagline}</h2>
 					{movieData.genres.map((genre) => {
 						return (
-							<h3 key={genre.id} className="Content-genre">
+							<h3 key={genre.id} className="Content-tag">
 								{genre.name}
 							</h3>
 						);
@@ -52,11 +49,23 @@ const MoviePage = () => {
 					</aside>
 					<aside className="Content-data">{movieData.runtime} minutes</aside>
 					<p className="Content-data">{movieData.overview}</p>
+					<Link to={movieData.imdb_url}>
+						<Button color="warning">IMDb</Button>
+					</Link>
+					{movieData.streaming ? (
+						<StreamingList providers={movieData.streaming} />
+					) : (
+						<div>
+							<h3 className="Content-tag">Not Available to Stream</h3>
+						</div>
+					)}
 				</Col>
 			</Row>
-			<VideoReel />
-			<StreamingList />
-			<Credits />
+			<VideoReel
+				videos={movieData.videos.filter((video) => {
+					return video.site === 'YouTube';
+				})}
+			/>
 		</Container>
 	);
 };

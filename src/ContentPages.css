@@ -10,12 +10,17 @@ h2.Content-tagline {
 	font-size: 3.5vw;
 }
 
-h3.Content-genre {
+h3.Content-tag {
 	display: inline-block;
-	margin: 0px 1vw;
+	margin: 0.5em 1vw;
 	font-size: 2.5vmin;
 }
 
 .Content-data {
 	font-size: 2vmin;
+}
+
+.Content-video {
+	border-radius: 15px;
+	margin: 5px;
 }

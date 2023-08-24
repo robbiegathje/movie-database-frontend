@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Col, Container, Row } from 'reactstrap';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Col, Container, Row } from 'reactstrap';
 
 import MovieDatabaseAPI from './api';
-import Credits from './Credits';
 import StreamingList from './StreamingList';
 import VideoReel from './VideoReel';
 
@@ -22,10 +21,8 @@ const SeriesPage = () => {
 	}, [id]);
 
 	if (!seriesData) {
-		return <h1>Loading</h1>;
+		return <h1>Loading...</h1>;
 	}
-
-	console.log(seriesData);
 
 	return (
 		<Container>
@@ -42,7 +39,7 @@ const SeriesPage = () => {
 					<h2 className="Content-tagline">{seriesData.tagline}</h2>
 					{seriesData.genres.map((genre) => {
 						return (
-							<h3 key={genre.id} className="Content-genre">
+							<h3 key={genre.id} className="Content-tag">
 								{genre.name}
 							</h3>
 						);
@@ -55,11 +52,23 @@ const SeriesPage = () => {
 					</aside>
 					<aside className="Content-data">{seriesData.status}</aside>
 					<p className="Content-data">{seriesData.overview}</p>
+					<Link to={seriesData.imdb_url}>
+						<Button color="warning">IMDb</Button>
+					</Link>
+					{seriesData.streaming ? (
+						<StreamingList providers={seriesData.streaming} />
+					) : (
+						<div>
+							<h3 className="Content-tag">Not Available to Stream</h3>
+						</div>
+					)}
 				</Col>
 			</Row>
-			<VideoReel />
-			<StreamingList />
-			<Credits />
+			<VideoReel
+				videos={seriesData.videos.filter((video) => {
+					return video.site === 'YouTube';
+				})}
+			/>
 		</Container>
 	);
 };
