@@ -1,12 +1,19 @@
 import axios from 'axios';
 
+const TOKEN_KEY = 'token';
+
 class MovieDatabaseAPI {
-	static token;
+	static getToken() {
+		const token = localStorage.getItem(TOKEN_KEY);
+		return token;
+	}
 
 	static async request(endpoint, data = {}, method = 'get') {
 		const url = `/${endpoint}`;
 		const headers = {
-			Authorization: `Bearer ${MovieDatabaseAPI.token}`,
+			Authorization: `Bearer ${
+				MovieDatabaseAPI.getToken() ? MovieDatabaseAPI.getToken() : ''
+			}`,
 		};
 		const params = method === 'get' ? data : {};
 
@@ -19,8 +26,14 @@ class MovieDatabaseAPI {
 		}
 	}
 
-	static async register() {}
-	static async login() {}
+	static async register(user) {
+		let res = await this.request('auth/register', user, 'post');
+		return res.token;
+	}
+	static async authenticate(user) {
+		let res = await this.request('auth/login', user, 'post');
+		return res.token;
+	}
 	static async changePassword() {}
 	static async changeUsername() {}
 	static async getFavoriteMovies() {}
@@ -51,7 +64,6 @@ class MovieDatabaseAPI {
 	}
 }
 
-MovieDatabaseAPI.token =
-	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJyb2JiaWUiLCJpYXQiOjE2OTE3MTcwOTl9.rlrND6QeZuZ3Xkp72TxeMOL4k4bXtBOB2QpwyJEHlJc';
-
 export default MovieDatabaseAPI;
+
+export { TOKEN_KEY };

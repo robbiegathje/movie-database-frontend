@@ -1,7 +1,16 @@
 .Navbar-link {
-	margin: 0px 5vw;
+	margin: 0px 3vw;
 	color: gray;
 	text-decoration: none;
+}
+
+.Navbar-link:hover {
+	cursor: pointer;
+}
+
+.Navbar-link.Navbar-brand {
+	color: black;
+	font-weight: bolder;
 }
 
 .Navbar-link.active {
