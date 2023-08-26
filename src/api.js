@@ -33,7 +33,6 @@ class MovieDatabaseAPI {
 		const results = await this.request(`api/movies/${api_id}`);
 		return results.movie;
 	}
-	static async updateMovie() {}
 	static async searchMovies(query) {
 		const results = await this.request('api/search/movies', {
 			query,
@@ -44,7 +43,6 @@ class MovieDatabaseAPI {
 		const results = await this.request(`api/tv/${api_id}`);
 		return results.series;
 	}
-	static async updateTvSeries() {}
 	static async searchTv(query) {
 		const results = await this.request('api/search/tv', {
 			query,

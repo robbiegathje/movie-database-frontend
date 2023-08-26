@@ -1,0 +1,10 @@
+.Navbar-link {
+	margin: 0px 5vw;
+	color: gray;
+	text-decoration: none;
+}
+
+.Navbar-link.active {
+	color: black;
+	font-weight: bold;
+}

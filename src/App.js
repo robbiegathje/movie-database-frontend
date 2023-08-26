@@ -6,7 +6,6 @@ import './App.css';
 const App = () => {
 	return (
 		<div className="App">
-			<h1>Another Movie</h1>
 			<AppNavbar />
 			<AppRoutes />
 		</div>
