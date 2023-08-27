@@ -12,20 +12,20 @@ const App = () => {
 	const [token, setToken] = useLocalStorage(TOKEN_KEY);
 	const navigate = useNavigate();
 
-	const signup = (user) => {
+	const signup = async (user) => {
 		const register = async () => {
 			const res = await MovieDatabaseAPI.register(user);
 			setToken(res);
 		};
-		register();
+		await register();
 	};
 
-	const login = (user) => {
+	const login = async (user) => {
 		const authenticate = async () => {
 			const res = await MovieDatabaseAPI.authenticate(user);
 			setToken(res);
 		};
-		authenticate();
+		await authenticate();
 	};
 
 	const logout = () => {

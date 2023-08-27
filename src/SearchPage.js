@@ -59,10 +59,14 @@ const SearchPage = () => {
 					</Col>
 					<Row className="mt-2">
 						<Col xs="6" lg={{ offset: 6, size: 3 }} xl={{ offset: 8, size: 2 }}>
-							<Button onClick={searchMovies}>Search for Movies</Button>
+							<Button onClick={searchMovies} color="secondary" outline>
+								Search for Movies
+							</Button>
 						</Col>
 						<Col xs="6" lg="3" xl="2">
-							<Button onClick={searchTv}>Search for TV</Button>
+							<Button onClick={searchTv} color="secondary" outline>
+								Search for TV
+							</Button>
 						</Col>
 					</Row>
 				</FormGroup>

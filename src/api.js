@@ -34,8 +34,14 @@ class MovieDatabaseAPI {
 		let res = await this.request('auth/login', user, 'post');
 		return res.token;
 	}
-	static async changePassword() {}
-	static async changeUsername() {}
+	static async changePassword(userId, password, newPassword) {
+		let res = await this.request(
+			`api/users/${userId}/change-password`,
+			{ password, newPassword },
+			'patch'
+		);
+		return res;
+	}
 	static async getFavoriteMovies() {}
 	static async addFavoriteMovie() {}
 	static async removeFavoriteMovie() {}

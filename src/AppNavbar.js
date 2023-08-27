@@ -19,7 +19,7 @@ const AppNavbar = ({ logout }) => {
 
 	return (
 		<Navbar>
-			<NavbarBrand>
+			<NavbarBrand tag="div">
 				<NavLink to="/" className="Navbar-link Navbar-brand">
 					AnotherMovie.app
 				</NavLink>
@@ -36,9 +36,9 @@ const AppNavbar = ({ logout }) => {
 						<NavLink to="/users/1" end className="Navbar-link">
 							Edit User
 						</NavLink>
-						<a onClick={logout} className="Navbar-link">
+						<button onClick={logout} className="Navbar-link">
 							Logout
-						</a>
+						</button>
 					</>
 				) : (
 					<>
