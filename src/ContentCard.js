@@ -3,6 +3,7 @@ import {
 	Button,
 	Card,
 	CardBody,
+	CardFooter,
 	CardImg,
 	CardSubtitle,
 	CardText,
@@ -10,6 +11,7 @@ import {
 	Col,
 } from 'reactstrap';
 
+import cleanDateFormat from './helpers/cleanDateFormat';
 import shorten from './helpers/shorten';
 
 const ContentCard = ({
@@ -19,6 +21,10 @@ const ContentCard = ({
 	poster_url,
 	release_date,
 	content,
+	includeRemoveFavorite = false,
+	removeFavorite = () => {
+		return;
+	},
 }) => {
 	return (
 		<Col xs="6" sm="4" lg="3">
@@ -32,7 +38,9 @@ const ContentCard = ({
 					}
 				/>
 				<CardTitle>{title}</CardTitle>
-				<CardSubtitle>{release_date}</CardSubtitle>
+				<CardSubtitle>
+					{release_date ? cleanDateFormat(release_date) : null}
+				</CardSubtitle>
 				<CardBody>
 					<CardText>{shorten(overview, 100)}</CardText>
 					<Link to={`/${content}/${api_id}`}>
@@ -41,6 +49,18 @@ const ContentCard = ({
 						</Button>
 					</Link>
 				</CardBody>
+				{includeRemoveFavorite ? (
+					<CardFooter>
+						<Button
+							onClick={() => {
+								removeFavorite(api_id);
+							}}
+							color="danger"
+							outline>
+							Remove Favorite
+						</Button>
+					</CardFooter>
+				) : null}
 			</Card>
 		</Col>
 	);

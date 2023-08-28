@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import { Nav, Navbar, NavbarBrand } from 'reactstrap';
 
 import TokenContext from './TokenContext';
@@ -8,6 +9,8 @@ import './AppNavbar.css';
 
 const AppNavbar = ({ logout }) => {
 	const token = useContext(TokenContext);
+	const { decodedToken } = useJwt(token);
+	const { id } = decodedToken || {};
 
 	const checkForUser = () => {
 		if (typeof token === 'string' && token !== '') {
@@ -30,10 +33,10 @@ const AppNavbar = ({ logout }) => {
 				</NavLink>
 				{checkForUser() ? (
 					<>
-						<NavLink to="/users/1/lists" end className="Navbar-link">
+						<NavLink to={`/users/${id}/lists`} end className="Navbar-link">
 							Favorites
 						</NavLink>
-						<NavLink to="/users/1" end className="Navbar-link">
+						<NavLink to={`/users/${id}`} end className="Navbar-link">
 							Edit User
 						</NavLink>
 						<button onClick={logout} className="Navbar-link">

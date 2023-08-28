@@ -1,0 +1,9 @@
+.LandingPage-link {
+	color: black;
+	text-decoration: none;
+}
+
+.LandingPage-link:hover {
+	color: rgb(0, 0, 155);
+	text-decoration: underline;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Col, Container, Row } from 'reactstrap';
+import { Button, Col, Container, Row, Spinner } from 'reactstrap';
 
 import MovieDatabaseAPI from './api';
 import StreamingList from './StreamingList';
@@ -8,7 +8,12 @@ import VideoReel from './VideoReel';
 
 import './ContentPages.css';
 
-const SeriesPage = () => {
+const SeriesPage = ({
+	checkForUser,
+	favorites,
+	addFavorite,
+	removeFavorite,
+}) => {
 	const [seriesData, setSeriesData] = useState();
 	const { id } = useParams();
 
@@ -21,8 +26,28 @@ const SeriesPage = () => {
 	}, [id]);
 
 	if (!seriesData) {
-		return <h1>Loading...</h1>;
+		return <Spinner></Spinner>;
 	}
+
+	const favoriteButton = favorites.find((series) => {
+		return +series.api_id === +id;
+	}) ? (
+		<Button
+			onClick={() => {
+				removeFavorite(id);
+			}}
+			color="danger">
+			Remove Favorite
+		</Button>
+	) : (
+		<Button
+			onClick={() => {
+				addFavorite(id);
+			}}
+			color="success">
+			Add to Favorites
+		</Button>
+	);
 
 	return (
 		<Container>
@@ -52,9 +77,14 @@ const SeriesPage = () => {
 					</aside>
 					<aside className="Content-data">{seriesData.status}</aside>
 					<p className="Content-data">{seriesData.overview}</p>
-					<Link to={seriesData.imdb_url}>
-						<Button color="warning">IMDb</Button>
-					</Link>
+					<Row>
+						{checkForUser() ? <Col>{favoriteButton}</Col> : null}
+						<Col>
+							<Link to={seriesData.imdb_url}>
+								<Button color="warning">IMDb</Button>
+							</Link>
+						</Col>
+					</Row>
 					{seriesData.streaming ? (
 						<StreamingList providers={seriesData.streaming} />
 					) : (

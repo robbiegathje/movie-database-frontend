@@ -30,10 +30,12 @@ class MovieDatabaseAPI {
 		let res = await this.request('auth/register', user, 'post');
 		return res.token;
 	}
+
 	static async authenticate(user) {
 		let res = await this.request('auth/login', user, 'post');
 		return res.token;
 	}
+
 	static async changePassword(userId, password, newPassword) {
 		let res = await this.request(
 			`api/users/${userId}/change-password`,
@@ -42,26 +44,70 @@ class MovieDatabaseAPI {
 		);
 		return res;
 	}
-	static async getFavoriteMovies() {}
-	static async addFavoriteMovie() {}
-	static async removeFavoriteMovie() {}
-	static async getFavoriteTv() {}
-	static async addFavoriteTv() {}
-	static async removeFavoriteTv() {}
+
+	static async getFavoriteMovies(userId) {
+		let res = await this.request(`api/users/${userId}/favorite-movies`);
+		return res.favorites;
+	}
+
+	static async addFavoriteMovie(userId, apiId) {
+		let res = await this.request(
+			`api/users/${userId}/favorite-movies`,
+			{ id: apiId },
+			'post'
+		);
+		return res;
+	}
+
+	static async removeFavoriteMovie(userId, apiId) {
+		let res = await this.request(
+			`api/users/${userId}/favorite-movies`,
+			{ id: apiId },
+			'delete'
+		);
+		return res;
+	}
+
+	static async getFavoriteTv(userId) {
+		let res = await this.request(`api/users/${userId}/favorite-tv`);
+		return res.favorites;
+	}
+
+	static async addFavoriteTv(userId, apiId) {
+		let res = await this.request(
+			`api/users/${userId}/favorite-tv`,
+			{ id: apiId },
+			'post'
+		);
+		return res;
+	}
+
+	static async removeFavoriteTv(userId, apiId) {
+		let res = await this.request(
+			`api/users/${userId}/favorite-tv`,
+			{ id: apiId },
+			'delete'
+		);
+		return res;
+	}
+
 	static async getMovie(api_id) {
 		const results = await this.request(`api/movies/${api_id}`);
 		return results.movie;
 	}
+
 	static async searchMovies(query) {
 		const results = await this.request('api/search/movies', {
 			query,
 		});
 		return results.results;
 	}
+
 	static async getTvSeries(api_id) {
 		const results = await this.request(`api/tv/${api_id}`);
 		return results.series;
 	}
+
 	static async searchTv(query) {
 		const results = await this.request('api/search/tv', {
 			query,
