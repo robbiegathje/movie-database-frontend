@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const INTERNAL_API_BASE_URL =
+	'https://another-movie-app-7cb2c2373963.herokuapp.com';
 const TOKEN_KEY = 'token';
 
 class MovieDatabaseAPI {
@@ -9,7 +11,7 @@ class MovieDatabaseAPI {
 	}
 
 	static async request(endpoint, data = {}, method = 'get') {
-		const url = `/${endpoint}`;
+		const url = `${INTERNAL_API_BASE_URL}/${endpoint}`;
 		const headers = {
 			Authorization: `Bearer ${
 				MovieDatabaseAPI.getToken() ? MovieDatabaseAPI.getToken() : ''
