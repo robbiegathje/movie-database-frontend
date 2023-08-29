@@ -25,7 +25,7 @@ const UserList = ({
 	}
 
 	if (!checkForAuthorizedUser(id, paramId)) {
-		return <Navigate to={`/users/${id}`} replace={true} />;
+		return <Navigate to={`/${contentType}/lists/${id}`} replace={true} />;
 	}
 
 	return (

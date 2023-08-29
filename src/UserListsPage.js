@@ -26,7 +26,7 @@ const UserListsPage = ({ checkForUser, checkForAuthorizedUser }) => {
 	}
 
 	if (!checkForAuthorizedUser(id, paramId)) {
-		return <Navigate to={`/users/${id}`} replace={true} />;
+		return <Navigate to={`/users/${id}/lists`} replace={true} />;
 	}
 
 	return (
