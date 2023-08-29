@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import {
 	Alert,
 	Button,
@@ -13,21 +14,29 @@ import {
 } from 'reactstrap';
 
 import MovieDatabaseAPI from './api';
+import TokenContext from './TokenContext';
 
 const INITIAL_STATE = {
 	password: '',
 	newPassword: '',
 };
 
-const UserEditForm = ({ checkForUser }) => {
+const UserEditForm = ({ checkForUser, checkForAuthorizedUser }) => {
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [errors, setErrors] = useState([]);
 	const [working, setWorking] = useState(false);
 	const navigate = useNavigate();
 	const { id } = useParams();
+	const token = useContext(TokenContext);
+	const { decodedToken } = useJwt(token);
+	const { id: userId } = decodedToken || {};
 
 	if (!checkForUser()) {
 		return <Navigate to="/" replace={true} />;
+	}
+
+	if (!checkForAuthorizedUser(userId, id)) {
+		return <Navigate to={`/users/${userId}`} replace={true} />;
 	}
 
 	const handleChange = (event) => {

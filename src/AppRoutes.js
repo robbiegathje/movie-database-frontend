@@ -29,6 +29,14 @@ const AppRoutes = ({ login, signup }) => {
 		}
 	};
 
+	const checkForAuthorizedUser = (userId, paramId) => {
+		if (+userId === +paramId) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	useEffect(() => {
 		const getFavoriteMovies = async () => {
 			const response = await MovieDatabaseAPI.getFavoriteMovies(id);
@@ -93,17 +101,28 @@ const AppRoutes = ({ login, signup }) => {
 			/>
 			<Route
 				path="/users/:id"
-				element={<UserEditForm checkForUser={checkForUser} />}
+				element={
+					<UserEditForm
+						checkForUser={checkForUser}
+						checkForAuthorizedUser={checkForAuthorizedUser}
+					/>
+				}
 			/>
 			<Route
 				path="/users/:id/lists"
-				element={<UserListsPage checkForUser={checkForUser} />}
+				element={
+					<UserListsPage
+						checkForUser={checkForUser}
+						checkForAuthorizedUser={checkForAuthorizedUser}
+					/>
+				}
 			/>
 			<Route
 				path="/movies/lists/:id"
 				element={
 					<UserList
 						checkForUser={checkForUser}
+						checkForAuthorizedUser={checkForAuthorizedUser}
 						favorites={favoriteMovies}
 						removeFavorite={(api_id) => {
 							removeFavorite('movies', api_id);
@@ -117,6 +136,7 @@ const AppRoutes = ({ login, signup }) => {
 				element={
 					<UserList
 						checkForUser={checkForUser}
+						checkForAuthorizedUser={checkForAuthorizedUser}
 						favorites={favoriteTv}
 						removeFavorite={(api_id) => {
 							removeFavorite('tv', api_id);

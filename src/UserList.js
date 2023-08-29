@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { Container, Row } from 'reactstrap';
 
@@ -8,13 +8,24 @@ import TokenContext from './TokenContext';
 
 import './ContentPages.css';
 
-const UserList = ({ checkForUser, favorites, removeFavorite, contentType }) => {
+const UserList = ({
+	checkForUser,
+	checkForAuthorizedUser,
+	favorites,
+	removeFavorite,
+	contentType,
+}) => {
+	const { id: paramId } = useParams();
 	const token = useContext(TokenContext);
 	const { decodedToken } = useJwt(token);
-	const { username } = decodedToken || {};
+	const { id, username } = decodedToken || {};
 
 	if (!checkForUser()) {
 		return <Navigate to="/" replace={true} />;
+	}
+
+	if (!checkForAuthorizedUser(id, paramId)) {
+		return <Navigate to={`/users/${id}`} replace={true} />;
 	}
 
 	return (

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import {
 	Button,
@@ -15,13 +15,18 @@ import TokenContext from './TokenContext';
 
 import './ContentPages.css';
 
-const UserListsPage = ({ checkForUser }) => {
+const UserListsPage = ({ checkForUser, checkForAuthorizedUser }) => {
+	const { id: paramId } = useParams();
 	const token = useContext(TokenContext);
 	const { decodedToken } = useJwt(token);
 	const { id, username } = decodedToken || {};
 
 	if (!checkForUser()) {
 		return <Navigate to="/" replace={true} />;
+	}
+
+	if (!checkForAuthorizedUser(id, paramId)) {
+		return <Navigate to={`/users/${id}`} replace={true} />;
 	}
 
 	return (
