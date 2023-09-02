@@ -13,19 +13,37 @@ import {
 import MovieDatabaseAPI from './api';
 import ContentCard from './ContentCard';
 
+import './SearchPage.css';
+
 const SearchPage = () => {
 	const [query, setQuery] = useState('');
+	const [searchInitiated, setSearchInitiated] = useState(false);
+	const [contentType, setContentType] = useState('movies');
 	const [results, setResults] = useState([]);
 
 	const handleChange = (event) => {
 		setQuery(event.target.value);
 	};
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
+	const handleToggle = (event) => {
+		if (event.target.checked) {
+			setContentType('tv');
+		} else {
+			setContentType('movies');
+		}
 	};
 
-	const searchMovies = async (event) => {
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		setSearchInitiated(true);
+		if (contentType === 'movies') {
+			searchMovies();
+		} else {
+			searchTv();
+		}
+	};
+
+	const searchMovies = async () => {
 		const response = await MovieDatabaseAPI.searchMovies(query);
 		const results = response.map((result) => {
 			return { ...result, content: 'movies' };
@@ -33,7 +51,7 @@ const SearchPage = () => {
 		setResults(results);
 	};
 
-	const searchTv = async (event) => {
+	const searchTv = async () => {
 		const response = await MovieDatabaseAPI.searchTv(query);
 		const results = response.map((result) => {
 			return { ...result, content: 'tv' };
@@ -48,7 +66,7 @@ const SearchPage = () => {
 					<Label xs="2" for="query">
 						Search:
 					</Label>
-					<Col xs="10">
+					<Col xs="10" md="6" lg="7" xl="8">
 						<Input
 							id="query"
 							name="query"
@@ -57,20 +75,41 @@ const SearchPage = () => {
 							onChange={handleChange}
 						/>
 					</Col>
+					<Col xs="12" md="4" lg="3" xl="2">
+						<Row>
+							<Col>
+								<span>Movies</span>
+							</Col>
+							<Col>
+								<input
+									type="checkbox"
+									onChange={handleToggle}
+									id="toggle"
+									className="checkbox"
+								/>
+								<label htmlFor="toggle" className="switch"></label>
+							</Col>
+							<Col>
+								<span>TV</span>
+							</Col>
+						</Row>
+					</Col>
 					<Row className="mt-2">
-						<Col xs="6" lg={{ offset: 6, size: 3 }} xl={{ offset: 8, size: 2 }}>
-							<Button onClick={searchMovies} color="secondary" outline>
-								Search for Movies
-							</Button>
-						</Col>
-						<Col xs="6" lg="3" xl="2">
-							<Button onClick={searchTv} color="secondary" outline>
-								Search for TV
-							</Button>
+						<Col
+							xs={{ size: 12 }}
+							md={{ offset: 4, size: 4 }}
+							lg={{ offset: 6, size: 3 }}
+							xl={{ offset: 8, size: 2 }}>
+							{contentType === 'movies' ? (
+								<Button color="success">Search for Movies</Button>
+							) : (
+								<Button color="warning">Search for TV</Button>
+							)}
 						</Col>
 					</Row>
 				</FormGroup>
 			</Form>
+			{searchInitiated ? <h2>{results.length} Results Found</h2> : null}
 			{results.length === 0 ? null : (
 				<Row className="mt-2">
 					{results.map((result) => {

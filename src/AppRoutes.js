@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 
 import MovieDatabaseAPI from './api';
+import AboutPage from './AboutPage';
 import LandingPage from './LandingPage';
 import MoviePage from './MoviePage';
 import SearchPage from './SearchPage';
@@ -89,6 +90,7 @@ const AppRoutes = ({ login, signup }) => {
 	return (
 		<Routes>
 			<Route path="/" element={<LandingPage checkForUser={checkForUser} />} />
+			<Route path="/about" element={<AboutPage />} />
 			<Route
 				path="/register"
 				element={

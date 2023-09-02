@@ -5,6 +5,7 @@ import { Button, Col, Container, Row, Spinner } from 'reactstrap';
 import MovieDatabaseAPI from './api';
 import StreamingList from './StreamingList';
 import VideoReel from './VideoReel';
+import cleanDateFormat from './helpers/cleanDateFormat';
 
 import './ContentPages.css';
 
@@ -69,9 +70,11 @@ const SeriesPage = ({
 							</h3>
 						);
 					})}
-					<aside className="Content-data">
-						First Aired {seriesData.first_air_date}
-					</aside>
+					{seriesData.first_air_date ? (
+						<aside className="Content-data">
+							First Aired {cleanDateFormat(seriesData.first_air_date)}
+						</aside>
+					) : null}
 					<aside className="Content-data">
 						{seriesData.seasons} seasons ({seriesData.episodes} episodes)
 					</aside>
@@ -80,7 +83,10 @@ const SeriesPage = ({
 					<Row>
 						{checkForUser() ? <Col>{favoriteButton}</Col> : null}
 						<Col>
-							<Link to={seriesData.imdb_url}>
+							<Link
+								to={seriesData.imdb_url}
+								target="_blank"
+								rel="noopener noreferrer">
 								<Button color="warning">IMDb</Button>
 							</Link>
 						</Col>

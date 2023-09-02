@@ -1,23 +1,25 @@
 img.Content-poster {
 	width: 30vw;
+	padding: 5px;
 }
 
 h1.Content-title {
-	font-size: 6vw;
+	font-size: 3em;
 }
 
 h2.Content-tagline {
-	font-size: 3.5vw;
+	font-size: 2.5em;
 }
 
 h3.Content-tag {
 	display: inline-block;
-	margin: 0.5em 1vw;
-	font-size: 2.5vmin;
+	margin: 0.5em 1em;
+	font-size: 1.5em;
 }
 
 .Content-data {
-	font-size: 2vmin;
+	font-size: 1.25em;
+	padding: 5px;
 }
 
 .Content-video {

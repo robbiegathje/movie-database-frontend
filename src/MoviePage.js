@@ -5,6 +5,7 @@ import { Button, Col, Container, Row, Spinner } from 'reactstrap';
 import MovieDatabaseAPI from './api';
 import StreamingList from './StreamingList';
 import VideoReel from './VideoReel';
+import cleanDateFormat from './helpers/cleanDateFormat';
 
 import './ContentPages.css';
 
@@ -69,15 +70,20 @@ const MoviePage = ({
 							</h3>
 						);
 					})}
-					<aside className="Content-data">
-						Released {movieData.release_date}
-					</aside>
+					{movieData.release_date ? (
+						<aside className="Content-data">
+							Released {cleanDateFormat(movieData.release_date)}
+						</aside>
+					) : null}
 					<aside className="Content-data">{movieData.runtime} minutes</aside>
 					<p className="Content-data">{movieData.overview}</p>
 					<Row>
 						{checkForUser() ? <Col>{favoriteButton}</Col> : null}
 						<Col>
-							<Link to={movieData.imdb_url}>
+							<Link
+								to={movieData.imdb_url}
+								target="_blank"
+								rel="noopener noreferrer">
 								<Button color="warning">IMDb</Button>
 							</Link>
 						</Col>

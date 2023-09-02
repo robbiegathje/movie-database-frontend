@@ -31,13 +31,16 @@ const AppNavbar = ({ logout }) => {
 				<NavLink to="/search" className="Navbar-link">
 					Search
 				</NavLink>
+				<NavLink to="/about" className="Navbar-link">
+					About
+				</NavLink>
 				{checkForUser() ? (
 					<>
 						<NavLink to={`/users/${id}/lists`} end className="Navbar-link">
 							Favorites
 						</NavLink>
 						<NavLink to={`/users/${id}`} end className="Navbar-link">
-							Edit User
+							Change Password
 						</NavLink>
 						<button onClick={logout} className="Navbar-link">
 							Logout
