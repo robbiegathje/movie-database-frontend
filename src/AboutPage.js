@@ -6,10 +6,20 @@ const AboutPage = () => {
 			<Row>
 				<h2>Website by James "Robbie" Gathje</h2>
 				<Col xs={{ offset: 3, size: 3 }}>
-					<a href="https://github.com/robbiegathje/movie-database">GitHub</a>
+					<a
+						href="https://github.com/robbiegathje/movie-database"
+						target="_blank"
+						rel="noopener noreferrer">
+						GitHub
+					</a>
 				</Col>
 				<Col xs="3">
-					<a href="https://www.linkedin.com/in/jamesrgathje/">LinkedIn</a>
+					<a
+						href="https://www.linkedin.com/in/jamesrgathje/"
+						target="_blank"
+						rel="noopener noreferrer">
+						LinkedIn
+					</a>
 				</Col>
 			</Row>
 			<hr />
@@ -18,6 +28,22 @@ const AboutPage = () => {
 				<p>
 					To my wife for all your love, support, encouragement, help, and design
 					advice!
+				</p>
+				<p>
+					Default Movie / TV Series Poster Photo by{' '}
+					<a
+						href="https://unsplash.com/@ajeetmestry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+						target="_blank"
+						rel="noopener noreferrer">
+						Ajeet Mestry
+					</a>{' '}
+					on{' '}
+					<a
+						href="https://unsplash.com/photos/UBhpOIHnazM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+						target="_blank"
+						rel="noopener noreferrer">
+						Unsplash
+					</a>
 				</p>
 				<p>
 					And to The Movie Database, without which I would have no film & tv

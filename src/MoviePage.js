@@ -7,6 +7,7 @@ import StreamingList from './StreamingList';
 import VideoReel from './VideoReel';
 import cleanDateFormat from './helpers/cleanDateFormat';
 
+import defaultPoster from './static/images/default-poster.jpg';
 import './ContentPages.css';
 
 const MoviePage = ({
@@ -55,7 +56,7 @@ const MoviePage = ({
 			<Row>
 				<Col xs="12" sm="5">
 					<img
-						src={movieData.poster_url}
+						src={movieData.poster_url ? movieData.poster_url : defaultPoster}
 						alt={`${movieData.title} poster`}
 						className="Content-poster"
 					/>
