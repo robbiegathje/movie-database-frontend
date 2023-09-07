@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# AnotherMovie.app (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Springboard Capstone Two
 
-## Available Scripts
+### James "Robbie" Gathje
 
-In the project directory, you can run:
+Check out the site! [AnotherMovie.app](https://anothermovie.app)
 
-### `npm start`
+Backend code found [here](https://github.com/robbiegathje/movie-database).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Overview
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Site Welcome](docs/site_welcome.png)
 
-### `npm test`
+AnotherMovie.app is the go-to resource you need to find your next movie to watch or tv series to binge!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Providing search functionality:
 
-### `npm run build`
+![Movie Search](docs/movie_search.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![TV Search](docs/tv_search.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+And all the important details you want when finding new content: from streaming service availability to trailers and more!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Movie Details](docs/movie_details.png)
 
-### `npm run eject`
+![TV Details](docs/tv_details.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Further, by creating an account, you're able to save those movies and tv series that you're interested in, no matter the streaming service, all in one place!
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Personal Watch Lists](docs/favorite_lists.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Favorites](docs/favorites.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+User Flow:
 
-## Learn More
+![User Flow Diagram](docs/user_flow_diagram.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Testing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Tests are found with the same name and alongside the files they are testing in their respective directories. All tests can be run from the command line in the root directory with:
 
-### Code Splitting
+`jest`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+or
 
-### Analyzing the Bundle Size
+`npm test`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Technologies Used
 
-### Making a Progressive Web App
+* [The Movie Database](https://developer.themoviedb.org/docs)
+* JavaScript
+* React
+* React Router
+* Node.js
+* Express.js
+* PostgreSQL
+* jsonwebtoken
+* bcrypt
+* Axios
+* node-postgres
+* HTML
+* Reactstrap
+* Bootstrap
+* CSS
+* Jest
+* React Testing Library
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Database Schema:
 
-### Advanced Configuration
+![Database Schema Diagram](docs/database_schema.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Special Thanks
 
-### Deployment
+To TMDb for maintaining such a massive and reliable database of movie and tv data that this app would not survive without.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+And to my wife, who supports me every step of the way, without whom I could do none of this. And an extra thanks for her help with design choices for all the apps I create!
