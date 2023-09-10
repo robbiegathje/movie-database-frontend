@@ -38,11 +38,7 @@ User Flow:
 
 ## Testing
 
-Tests are found with the same name and alongside the files they are testing in their respective directories. All tests can be run from the command line in the root directory with:
-
-`jest`
-
-or
+Tests can be run from the command line in the root directory with:
 
 `npm test`
 
